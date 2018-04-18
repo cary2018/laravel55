@@ -1,0 +1,1 @@
+<?php/** * Created by PhpStorm. * User: asusa * Date: 2018/4/11/0011 * Author: Cary.He * Contact QQ  : 373889161($S$-Memory) * email: 373889161@qq.com * Time: 10:54 */namespace App\Http\Controllers\Admin;use App\Http\Controllers\Controller;class IndexController extends Controller{    public function index()    {        return view('admin.index');    }}

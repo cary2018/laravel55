@@ -1,0 +1,24 @@
+
+//管理员数据表
+
+CREATE TABLE `lar_admin_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(30) NOT NULL COMMENT '用户名',
+  `password` varchar(60) NOT NULL COMMENT '用户密码',
+  `jurisdiction` varchar(255) NOT NULL COMMENT '用户权限',
+  `state` int(11) NOT NULL COMMENT '用户状态',
+  `add_time` int(11) NOT NULL COMMENT '注册时间',
+  `up_time` int(11) NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+create table lar_category(
+   id int not null primary key auto_increment,
+   cate_pid int not null comment '父级分类',
+   cate_name varchar(50) not null comment '分类名',
+   cate_title varchar(50) not null comment '分类说明',
+   cate_keywords varchar(255) not null comment '关键字',
+   cate_description varchar(255) not null comment '描述',
+   cate_view int not null comment '查看次数',
+   cate_order tinyint(4) not null comment '排序'
+)engine=myisam charset=utf8;
