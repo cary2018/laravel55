@@ -21,9 +21,16 @@ Route::group(['middleware'=>['web']],function(){
 Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin.login'],function(){
     Route::get('/','IndexController@index');
     Route::get('index','IndexController@index');
-    Route::get('article','ArticleController@index');
     Route::any('pass','AdminController@pass');
+    Route::any('upload','UploadController@upload');
+
     Route::resource('category','CategoryController');
+    Route::resource('article','ArticleController');
+    Route::resource('links','LinksController');
+    Route::resource('navs','NavsController');
+
+    Route::post('change', 'configController@change');
+    Route::resource('config','ConfigController');
 
 });
 

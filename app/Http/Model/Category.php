@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     protected $table = 'category';    //自定义表名
-    protected $primaryKey = 'id';       //自定义主键
+    protected $primaryKey = 'cate_id';       //自定义主键
     public $timestamps = false;         //禁用默认更新设置
-    protected $guarded = [];
+    protected $guarded = [];            //保护字段
 
     /**
      * @param $data         传入的据
@@ -39,12 +39,12 @@ class Category extends Model
                 $arr[] = $data[$k];
                 foreach($data as $m=>$n)
                 {
-                    if($n->$pid == $v->id)
+                    if($n->$pid == $v->cate_id)
                     {
                         $data[$m]['_parent'] = $data[$k]['_parent']+1;
                         $data[$m]['_'.$file_name] = '┝'.$this->line($data[$m]['_parent']).$data[$m][$file_name];
                         $arr[] = $data[$m];
-                        $arr[] = $this->getTree($data,$file_name,$pid,$n->id,$data[$m]['_parent']);
+                        $arr[] = $this->getTree($data,$file_name,$pid,$n->cate_id,$data[$m]['_parent']);
                     }
                 }
             }
@@ -97,7 +97,7 @@ class Category extends Model
         static $arr = array();
         foreach($data as $v)
         {
-            $arr[] = $v->id;
+            $arr[] = $v->cate_id;
         }
         return $arr;
     }
