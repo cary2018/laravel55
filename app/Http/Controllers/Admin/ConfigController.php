@@ -12,6 +12,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Model\Sys_config;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 
@@ -89,6 +90,7 @@ class ConfigController extends Controller
             $re = Sys_config::create($input);
             if ($re)
             {
+                $this->putFile();
                 return redirect('admin/config');
             }else{
                 return back()->with('errors', '添加失败，请重新添加！');
@@ -142,6 +144,7 @@ class ConfigController extends Controller
             $re = Sys_config::where('config_id',$id)->update($input);
             if ($re)
             {
+                $this->putFile();
                 return redirect('admin/config');
             }else{
                 return back()->with('errors', '数据未发生变化！！');
@@ -166,6 +169,7 @@ class ConfigController extends Controller
                 'status'=>0,
                 'msg'=>'删除成功！'
             ];
+            $this->putFile();
         }else{
             $data = [
                 'status'=>1,
@@ -181,7 +185,20 @@ class ConfigController extends Controller
         foreach($input['config_id'] as $k=>$v)
         {
             Sys_config::where('config_id',$v)->update(['config_content' => $input['config_content'][$k]]);
+            $this->putFile();
         }
         return back()->with('errors', '更新完成！');
+    }
+
+    /**
+     * 将配置项写入文件中
+     */
+    public function putFile()
+    {
+        $data = Sys_config::pluck('config_content','config_name')->all();
+        $path = base_path().'\config\web.php';
+        $str = '<?php return '.var_export($data,true).';';
+        file_put_contents($path,$str);
+        //dd($data);
     }
 }

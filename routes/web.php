@@ -30,6 +30,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin.login'
     Route::resource('navs','NavsController');
 
     Route::post('change', 'configController@change');
+    Route::get('putfile', 'configController@putFile');
     Route::resource('config','ConfigController');
 
 });
