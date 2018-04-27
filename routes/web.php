@@ -30,7 +30,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin.login'
     Route::post('changeOrder','NavsController@changeOrder');
     Route::post('changeShow','NavsController@changeShow');
 
-    Route::post('change', 'configController@change');
+    Route::post('change', 'ConfigController@change');
     Route::resource('config','ConfigController');
 
 });
