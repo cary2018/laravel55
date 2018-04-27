@@ -10,14 +10,13 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//前台页面
 Route::group(['middleware'=>['web']],function(){
-    Route::get('/', function () {
-        //return 'hello laravel!';
-        return view('welcome');
-    });
+    Route::get('/','home\IndexController@index');
+    Route::get('/cate/{cate_id}','home\IndexController@cate');
+    Route::get('a/{art_id}','home\IndexController@article');
 });
-
+//后台页面组
 Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin.login'],function(){
     Route::get('/','IndexController@index');
     Route::get('index','IndexController@index');
@@ -28,13 +27,14 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin.login'
     Route::resource('article','ArticleController');
     Route::resource('links','LinksController');
     Route::resource('navs','NavsController');
+    Route::post('changeOrder','NavsController@changeOrder');
+    Route::post('changeShow','NavsController@changeShow');
 
     Route::post('change', 'configController@change');
-    Route::get('putfile', 'configController@putFile');
     Route::resource('config','ConfigController');
 
 });
-
+//后台登录路由组
 Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['web']],function(){
     Route::any('login','LoginController@index');
     Route::get('logut','LoginController@logut');

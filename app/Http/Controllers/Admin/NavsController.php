@@ -39,6 +39,7 @@ class NavsController extends Controller
     public function store()
     {
         $input = Input::except('_token');
+        $input = array_filter($input);
         $rules = [
             'nav_name' => 'required',
             'nav_url' => 'required',
@@ -112,5 +113,56 @@ class NavsController extends Controller
             ];
         }
         return $data;
+    }
+
+    /**
+     * 异步更新排序&&是否有效
+     */
+    public function changeOrder()
+    {
+        $input = Input::except('_token');
+        $re = Navs::where('nav_id',$input['nav_id'])->update($input);
+        if($re)
+        {
+            $data = Navs::find($input['nav_id'],['nav_id','nav_show']);
+            $result = [
+                'status'=>1,
+                'msg' => '状态更新成功！'
+            ];
+        }else{
+            $result = [
+                'status'=>0,
+                'msg' => '状态更新失败！'
+            ];
+        }
+        return $result;
+    }
+
+    public function changeShow()
+    {
+        $input = Input::except('_token');
+        $nav = Navs::find($input['nav_id']);
+        if($input['nav_show']==0)
+        {
+            $nav->nav_show = 1;
+        }else{
+            $nav->nav_show = 0;
+        }
+        $re = $nav->update();
+        if($re)
+        {
+            $data = Navs::find($input['nav_id'],['nav_id','nav_show']);
+            $result = [
+                'status'=>$data->nav_show,
+                'msg' => '状态更新成功！'
+            ];
+        }else{
+            $result = [
+                'status'=>$data->nav_show,
+                'msg' => '状态更新失败！'
+            ];
+        }
+
+        return $result;
     }
 }

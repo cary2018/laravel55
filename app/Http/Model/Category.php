@@ -32,9 +32,11 @@ class Category extends Model
                 {
                     $data[$k]['_parent'] = $i+1;
                     $data[$k]['_'.$file_name] = '┝'.$this->line($data[$k]['_parent']).$data[$k][$file_name];
+                    $data[$k]['_art'] = Article::where('cate_id','=',$v->cate_id)->count();
                 }
                 else{
                     $data[$k]['_'.$file_name] = $data[$k][$file_name];
+                    $data[$k]['_art'] = Article::where('cate_id','=',$v->cate_id)->count();
                 }
                 $arr[] = $data[$k];
                 foreach($data as $m=>$n)
@@ -43,6 +45,7 @@ class Category extends Model
                     {
                         $data[$m]['_parent'] = $data[$k]['_parent']+1;
                         $data[$m]['_'.$file_name] = '┝'.$this->line($data[$m]['_parent']).$data[$m][$file_name];
+                        $data[$m]['_art'] = Article::where('cate_id','=',$n->cate_id)->count();
                         $arr[] = $data[$m];
                         $arr[] = $this->getTree($data,$file_name,$pid,$n->cate_id,$data[$m]['_parent']);
                     }

@@ -759,7 +759,11 @@ ul.dropdown-menu {
 }
 .profile_img span.prfil-img{
 	float:left;
+	border-radius: 100%;
+	overflow: hidden;
+	border: #FFF 4px solid;
 }
+.prfil-img img{width:50px;height:50px;}
 .user-name{
 	 float:left;
 	 margin-top:8px;
