@@ -8,4 +8,4 @@ PHP Mbstring 扩展<br>
 PHP Tokenizer 扩展<br>
 PHP XML 扩展<br>
 参见：http://laravelacademy.org/post/7620.html<br>
-仅为参个人学习使用，<br>
+该项目仅为个人学习使用，<br>
