@@ -1,0 +1,1 @@
+<form method="POST" action="{{url('admin/upload_image')}}" enctype="multipart/form-data">{{csrf_field()}}    <input type="file" name="myfile" />    <input type="submit" name="submit" value="Submit" /></form>
