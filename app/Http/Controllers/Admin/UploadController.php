@@ -57,7 +57,7 @@ class UploadController extends Controller
 
                 $new = new Images();
 
-                $new->scalePic($new_filename,300,300);
+                $new->scalePic($new_filename,300,300);    //生成等比例缩略图
 
             }
             return $file_path.$newName;
