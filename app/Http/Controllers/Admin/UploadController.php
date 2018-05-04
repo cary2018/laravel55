@@ -11,8 +11,8 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\core\Images;
 use Illuminate\Support\Facades\Input;
-use Intervention\Image\ImageManagerStatic as Image;//依赖包的Image静态方法生成缩略图
 
 class UploadController extends Controller
 {
@@ -44,12 +44,16 @@ class UploadController extends Controller
 
                 $thumb = public_path().$file_path.$thumb_name;
 
-                Image::make($new_filename)->resize(300, null, function ($constraint) {
+                /*Image::make($new_filename)->resize(300, null, function ($constraint) {
                     $constraint->aspectRatio();
-                })->save($thumb);  //生成缩略图并保存
-                Image::make($new_filename)->resize(300,300)->save($thumb);  //生成缩略图并保存
+                })->save($thumb);  //生成缩略图并保存*/
+
+                $new = new Images();
+
+                $new->scalePic($new_filename,300,300);
+
             }
-            return $file_path.$thumb_name;
+            return $file_path.$newName;
         }
     }
 
