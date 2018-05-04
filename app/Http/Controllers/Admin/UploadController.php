@@ -19,6 +19,13 @@ class UploadController extends Controller
 
     public function upload()
     {
+        $file_path = 'uploads/' . date('Y-m-d', time()) . '/';    //上传文件的目录
+        //判断文件目录是否存在,不存在则创建
+        if (!is_dir($file_path)) {
+            mkdir($file_path, 0777, true);
+        }
+
+        die;
         $file = Input::file('Filedata');
         $allowed_extensions = ["png", "jpg", "gif","jpeg","bmp"];
         if ($file->getClientOriginalExtension() && !in_array($file->getClientOriginalExtension(), $allowed_extensions)) {
