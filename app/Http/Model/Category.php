@@ -12,7 +12,7 @@ class Category extends Model
     protected $guarded = [];            //保护字段
 
     /**
-     * @param $data         传入的据
+     * @param $data         传入的数据（数组）
      * @param int $id       取指定ID的所有下级（包括自己）
      * @param int $i        计算菜单层级
      * @return array        返回结果
