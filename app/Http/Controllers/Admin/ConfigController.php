@@ -11,12 +11,10 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Model\Sys_config;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 
-class ConfigController extends Controller
+class ConfigController extends BaseController
 {
     //系统配置列表
     public function index()

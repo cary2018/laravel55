@@ -1,0 +1,1 @@
+<?php/** * Created by PhpStorm. * User: asusa * Date: 2018/6/15/0015 * Author: Cary.He * Contact QQ  : 373889161($S$-Memory) * email: 373889161@qq.com * Time: 14:53 */namespace App\Http\Controllers\Admin;class ErrorController extends BaseController{    public function index()    {        return view('admin.error.error');    }}

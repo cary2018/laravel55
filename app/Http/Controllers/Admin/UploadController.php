@@ -10,11 +10,11 @@
  */
 namespace App\Http\Controllers\admin;
 
-use App\Http\Controllers\Controller;
+
 use App\Http\core\Images;
 use Illuminate\Support\Facades\Input;
 
-class UploadController extends Controller
+class UploadController extends BaseController
 {
 
     public function upload()

@@ -10,12 +10,12 @@
  */
 namespace App\Http\Controllers\admin;
 
-use App\Http\Controllers\Controller;
+
 use App\Http\Model\Navs;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 
-class NavsController extends Controller
+class NavsController extends BaseController
 {
     //自定义菜单列表
     public function index()
@@ -138,6 +138,10 @@ class NavsController extends Controller
         return $result;
     }
 
+    /**
+     * @return array
+     * 异步更新导航状态
+     */
     public function changeShow()
     {
         $input = Input::except('_token');
