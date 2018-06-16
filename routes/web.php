@@ -38,6 +38,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin.login'
     Route::post('changeAdmin','AdminController@changeAdmin');
     Route::post('changeState','AdminController@changeState');
     Route::post('changeRole','RoleController@changeRole');
+    Route::post('changeJurisdiction','JurisdictionController@changeJurisdiction');
 
     Route::post('change', 'ConfigController@change');
     Route::resource('config','ConfigController');
