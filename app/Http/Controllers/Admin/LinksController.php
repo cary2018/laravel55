@@ -8,7 +8,7 @@
  * email: 373889161@qq.com
  * Time: 11:51
  */
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Model\Links;
 use Illuminate\Support\Facades\Input;

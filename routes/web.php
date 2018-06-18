@@ -24,7 +24,6 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin.login'
     Route::any('upload','UploadController@upload');
     Route::any('upload_image','UploadController@upload_image');
     Route::any('Error','ErrorController@index');
-    Route::any('test','UploadController@test');
 
     Route::resource('category','CategoryController');
     Route::resource('article','ArticleController');
