@@ -1,0 +1,2 @@
+alter table lar_article add user_id int not null comment'用户id' after art_id;
+alter table lar_admin_user add user_alias varchar(30) not null default '' comment '别名' after user_name;
