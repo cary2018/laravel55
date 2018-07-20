@@ -52,6 +52,7 @@ class LinksController extends BaseController
         ];
         $validator = Validator::make($input,$rules,$messages);
         if($validator->passes()){
+            $input = array_filter($input);
             $re = Links::create($input);
             if ($re)
             {
