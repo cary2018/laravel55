@@ -20,7 +20,8 @@ class NavsController extends BaseController
     //自定义菜单列表
     public function index()
     {
-        $data = Navs::orderby('nav_order','desc')->paginate(10);
+        $data = Navs::orderby('nav_order','desc')->get();
+        $data = (new Navs())->GetTree($data);
         return view('admin.navs.index')->with('data',$data);
     }
 
@@ -30,7 +31,9 @@ class NavsController extends BaseController
      */
     public function create()
     {
-        return view('admin.navs.add');
+        $data = Navs::where('nav_show',1)->orderby('nav_order','desc')->get();
+        $date = (new Navs())->GetTree($data);
+        return view('admin.navs.add')->with('arr',$date);
     }
 
     /**
@@ -70,7 +73,9 @@ class NavsController extends BaseController
     public function edit($id)
     {
         $field = Navs::find($id);
-        return view('admin.navs.edit',compact('field'));
+        $data = Navs::orderby('nav_order','desc')->get();
+        $arr = (new Navs())->GetTree($data);
+        return view('admin.navs.edit',compact('field','arr'));
     }
 
     /**
@@ -82,6 +87,21 @@ class NavsController extends BaseController
     {
         $input = Input::except('_token','_method');
         $input = array_filter($input);
+        if(!array_key_exists('nav_pid',$input)){
+            $input['nav_pid'] = 0;
+        }
+        if(!array_key_exists('nav_show',$input)){
+            $input['nav_show'] = 0;
+        }
+        $data = Navs::all();
+        $tree = (new Navs())->GetTree($data,$id);
+        $return_id = (new Navs())->return_id($tree);
+        if($id == $input['nav_pid']){
+            return back()->with('errors', '上级分类错误！！');
+        }
+        if(in_array($input['nav_pid'],$return_id)){
+            return back()->with('errors', '上级分类错误！！');
+        }
         $re = Navs::where('nav_id',$id)->update($input);
         if ($re)
         {

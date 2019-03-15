@@ -14,6 +14,7 @@
 Route::group(['middleware'=>['web']],function(){
     Route::get('/','home\IndexController@index');
     Route::get('/cate/{cate_id}','home\IndexController@cate');
+    Route::get('/search','home\IndexController@search');
     Route::get('a/{art_id}','home\IndexController@article');
 });
 //后台页面组路由
